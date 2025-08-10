@@ -314,9 +314,7 @@ class GenericToolSystem:
                     messages=[
                         {"role": "system", "content": "You are a tool that generates structured JSON responses."},
                         {"role": "user", "content": prompt}
-                    ],
-                    max_tokens=500,
-                    temperature=0.3
+                    ]
                 )
                 
                 # Parse the JSON response
@@ -491,8 +489,6 @@ class OpenAIClient:
             response = self.client.chat.completions.create(
                 model=self.model,
                 messages=enhanced_messages,
-                max_tokens=1000,
-                temperature=0.7
             )
             
             return response.choices[0].message.content
@@ -1351,8 +1347,8 @@ def main():
         
         openai_model = st.selectbox(
             "OpenAI Model",
-            options=["gpt-4o-mini", "gpt-4o", "gpt-4-turbo"],
-            index=["gpt-4o-mini", "gpt-4o", "gpt-4-turbo"].index(st.session_state.openai_model),
+            options=["gpt-4o-mini", "gpt-4o", "gpt-4-turbo", "gpt-5", "gpt-5-mini"],
+            index=["gpt-4o-mini", "gpt-4o", "gpt-4-turbo", "gpt-5", "gpt-5-mini"].index(st.session_state.openai_model),
             help="Choose the OpenAI model to use"
         )
         st.session_state.openai_model = openai_model

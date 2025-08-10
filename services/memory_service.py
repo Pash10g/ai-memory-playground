@@ -201,9 +201,12 @@ async def remember_content(request):
                     new_memory["access_count"] + memory["access_count"]
                 )
                 # Average embeddings
-                updated_embeddings = [
-                    (a + b) / 2 for a, b in zip(embeddings, memory["embeddings"])
-                ]
+                if "embeddings" in memory:
+                    updated_embeddings = [
+                        (a + b) / 2 for a, b in zip(embeddings, memory["embeddings"])
+                    ]
+                else:
+                    updated_embeddings = embeddings
                 # Generate new summary
                 summary_prompt = (
                     "Create a one-sentence summary capturing the key information:\n\n"
